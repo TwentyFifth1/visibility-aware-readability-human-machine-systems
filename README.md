@@ -1,4 +1,3 @@
-# visibility-aware-readability-human-machine-systems
 # Visibility-Aware Readability (Human–Machine Systems)
 
 This repository contains reproducible, publication-grade materials for studying text readability feasibility under controlled, classroom-like viewing configurations. The work is situated in the domain of human–machine systems, with a deliberate emphasis on perceptual accessibility rather than user intent, cognition, or downstream behavioral outcomes.
