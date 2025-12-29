@@ -140,59 +140,87 @@ If `participant_id` is absent, some scripts generate balanced pseudo-participant
 
 ## Installation
 
-Minimal (Recommended)
+### Minimal (Recommended)
+`pip install -U numpy pandas scikit-learn scipy matplotlib tqdm seaborn`
 
-```bash
-pip install -U numpy pandas scikit-learn scipy matplotlib tqdm seaborn
-thms_pipeline.py
 
-This is the primary script used for manuscript-quality results.
+### `thms_pipeline.py` 
+
+This is the **primary script** used for manuscript-quality results.
+
 python thms_pipeline.py
-What It Does
+## What It Does
+- Repeated stratified cross-validation with uncertainty estimation
+- Condition-blocked generalization tests
+- Logistic Regression and Random Forest baselines
+- Isotonic probability calibration
+- Sufficiency ablation with paired statistical testing
+- Subgroup and worst-case performance analysis
+- Robustness stress tests
+- Conformal prediction (including Mondrian variants)
+- Cross-fitted residual sufficiency tests
+- IEEE-ready LaTeX tables
+  
+---
 
-Repeated stratified cross-validation with uncertainty estimation
+### Additional Scripts
 
-Condition-blocked generalization tests
+### `thms_full.py`
 
-Logistic Regression and Random Forest baselines
-
-Isotonic probability calibration
-
-Sufficiency ablation with paired statistical testing
-
-Subgroup and worst-case performance analysis
-
-Robustness stress tests
-
-Conformal prediction (including Mondrian variants)
-
-Cross-fitted residual sufficiency tests
-
-IEEE-ready LaTeX tables
-
-Additional Scripts
-
-thms_full.py
 A Colab-oriented version of the full pipeline with identical scientific intent.
-Intended for cloud execution and reproducibility.
+This script is intended for cloud execution and reproducibility.
+  
+---
 
-perceptual_sufficiency_evaluation.py
-A standalone evaluation laboratory focusing on pooled out-of-fold (OOF) predictions and statistical sufficiency testing.
+### `perceptual_sufficiency_evaluation.py`
 
-Includes:
+A standalone evaluation laboratory focusing on pooled out-of-fold (OOF) predictions
+and statistical sufficiency testing.
 
-LOPO-style group evaluation (when available)
+## Includes:
+- LOPO-style group evaluation (when available)
+- Paired DeLong AUC tests
+- Bootstrap confidence intervals
+- Calibration diagnostics
+- Decision curve analysis
+- Robustness to feature and label noise
+- Conformal classification
+- Cross-fitted residual testing
+  
+---
 
-Paired DeLong AUC tests
+### `Project.py`
 
-Bootstrap confidence intervals
+Exploratory analysis and baseline modeling script.
 
-Calibration diagnostics
+## Includes:
 
-Decision curve analysis
+- Exploratory data analysis (EDA) plots
+- Baseline classifiers
+- ROC curves and confusion matrices
+- Calibration curves
+- Feature importance analysis
+- Partial Dependence Plots (PDPs)
+  
+---
 
-Robustness to feature and label noise
+### `Ablation_AUCperPaticipant.py`
 
-Conformal classification
+A didactic ablation and LOPO-style demonstration script.
 
-Cross-fitted residual testing
+## Includes:
+
+- Simple train/test ablation
+- Pseudo-participant assignment
+- Per-participant AUC visualization
+This script is illustrative and not the primary reporting pipeline.
+  
+---
+
+### Reproducibility
+
+- Fixed random seeds (`RANDOM_STATE = 42`) throughout
+- Leakage-safe preprocessing
+- Deterministic outputs except where stochastic repetition is intentional
+- Clear separation of code and results via GitHub branches
+
