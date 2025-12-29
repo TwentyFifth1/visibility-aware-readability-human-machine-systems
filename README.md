@@ -140,11 +140,10 @@ If `participant_id` is absent, some scripts generate balanced pseudo-participant
 
 ## Installation
 
-### Minimal (Recommended)
+Minimal (Recommended)
 
 ```bash
 pip install -U numpy pandas scikit-learn scipy matplotlib tqdm seaborn
-
 thms_pipeline.py
 
 This is the primary script used for manuscript-quality results.
@@ -172,13 +171,12 @@ Cross-fitted residual sufficiency tests
 IEEE-ready LaTeX tables
 
 Additional Scripts
-thms_full.py
 
+thms_full.py
 A Colab-oriented version of the full pipeline with identical scientific intent.
 Intended for cloud execution and reproducibility.
 
 perceptual_sufficiency_evaluation.py
-
 A standalone evaluation laboratory focusing on pooled out-of-fold (OOF) predictions and statistical sufficiency testing.
 
 Includes:
@@ -198,45 +196,3 @@ Robustness to feature and label noise
 Conformal classification
 
 Cross-fitted residual testing
-
-Project.py
-
-Exploratory analysis and baseline modeling script.
-
-Includes:
-
-Exploratory data analysis (EDA) plots
-
-Baseline classifiers
-
-ROC curves and confusion matrices
-
-Calibration curves
-
-Feature importance analysis
-
-Partial Dependence Plots (PDPs)
-
-Ablation_AUCperPaticipant.py
-
-A didactic ablation and LOPO-style demonstration script.
-
-Includes:
-
-Simple train/test ablation
-
-Pseudo-participant assignment
-
-Per-participant AUC visualization
-
-This script is illustrative and not the primary reporting pipeline.
-
-Reproducibility
-
-Fixed random seeds (RANDOM_STATE = 42) throughout
-
-Leakage-safe preprocessing
-
-Deterministic outputs except where stochastic repetition is intentional
-
-Clear separation of code and results via GitHub branches
