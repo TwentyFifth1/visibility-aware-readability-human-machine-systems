@@ -140,13 +140,103 @@ If `participant_id` is absent, some scripts generate balanced pseudo-participant
 
 ## Installation
 
-The codebase relies on standard scientific Python libraries and is designed to be lightweight and reproducible. A virtual environment is recommended.
-
-### Requirements
-- Python 3.8 or newer
-- CPU-only execution
-
-### Install Dependencies
+### Minimal (Recommended)
 
 ```bash
 pip install -U numpy pandas scikit-learn scipy matplotlib tqdm seaborn
+
+thms_pipeline.py
+
+This is the primary script used for manuscript-quality results.
+python thms_pipeline.py
+What It Does
+
+Repeated stratified cross-validation with uncertainty estimation
+
+Condition-blocked generalization tests
+
+Logistic Regression and Random Forest baselines
+
+Isotonic probability calibration
+
+Sufficiency ablation with paired statistical testing
+
+Subgroup and worst-case performance analysis
+
+Robustness stress tests
+
+Conformal prediction (including Mondrian variants)
+
+Cross-fitted residual sufficiency tests
+
+IEEE-ready LaTeX tables
+
+Additional Scripts
+thms_full.py
+
+A Colab-oriented version of the full pipeline with identical scientific intent.
+Intended for cloud execution and reproducibility.
+
+perceptual_sufficiency_evaluation.py
+
+A standalone evaluation laboratory focusing on pooled out-of-fold (OOF) predictions and statistical sufficiency testing.
+
+Includes:
+
+LOPO-style group evaluation (when available)
+
+Paired DeLong AUC tests
+
+Bootstrap confidence intervals
+
+Calibration diagnostics
+
+Decision curve analysis
+
+Robustness to feature and label noise
+
+Conformal classification
+
+Cross-fitted residual testing
+
+Project.py
+
+Exploratory analysis and baseline modeling script.
+
+Includes:
+
+Exploratory data analysis (EDA) plots
+
+Baseline classifiers
+
+ROC curves and confusion matrices
+
+Calibration curves
+
+Feature importance analysis
+
+Partial Dependence Plots (PDPs)
+
+Ablation_AUCperPaticipant.py
+
+A didactic ablation and LOPO-style demonstration script.
+
+Includes:
+
+Simple train/test ablation
+
+Pseudo-participant assignment
+
+Per-participant AUC visualization
+
+This script is illustrative and not the primary reporting pipeline.
+
+Reproducibility
+
+Fixed random seeds (RANDOM_STATE = 42) throughout
+
+Leakage-safe preprocessing
+
+Deterministic outputs except where stochastic repetition is intentional
+
+Clear separation of code and results via GitHub branches
