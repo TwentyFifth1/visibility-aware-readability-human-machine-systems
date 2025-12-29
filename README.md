@@ -1,94 +1,111 @@
 # Visibility-Aware Readability (Human–Machine Systems)
 
-This repository contains reproducible, publication-grade materials for studying text readability feasibility under controlled, classroom-like viewing configurations. The work is situated in the domain of human–machine systems, with a deliberate emphasis on perceptual accessibility rather than user intent, cognition, or downstream behavioral outcomes.
+This repository contains reproducible, publication-grade materials for studying text readability feasibility under controlled, classroom-like viewing configurations. The work is situated within the domain of human–machine systems, with a deliberate emphasis on perceptual accessibility rather than user intent, cognition, or downstream behavioral outcomes.
 
-This repository is created as an **individual submission** for the Human–Machine Systems course (Week 17: Implementation & GitHub Deployment). The scientific design, implementation, and experimental results follow the group project repository referenced below.
+This repository is created as an **individual submission** for the Human–Machine Systems course (Week 17: Implementation & GitHub Deployment). The scientific formulation, experimental design, implementation, and reported results follow the group project repository referenced below.
 
-## Project Motivation and Goal
+---
 
-The primary goal of this project is to model whether text is readable *in principle* (`can_read`) given a specific viewing setup. These setups include variations in viewing distance, angular size, head pose, display medium, and contrast conditions.
+## Background and Motivation
 
-Rather than focusing on subjective preference or comprehension outcomes, the study investigates perceptual feasibility: whether the physical and perceptual conditions permit readability at all. A key research question is whether a human-rated visibility score alone is predictively sufficient for readability when compared against richer geometric and environmental feature sets.
+Readability is often treated as a downstream cognitive or behavioral outcome. However, before comprehension, attention, or task performance can be meaningfully discussed, text must first be perceptually readable in principle.
+
+In classroom-like environments, readability depends on a combination of geometric factors (e.g., viewing distance and angular size), perceptual factors (e.g., contrast and medium), and observer configuration (e.g., head pose). This project focuses on modeling this perceptual feasibility layer and examining whether a human-rated visibility score can serve as a predictively sufficient proxy for readability.
+
+---
+
+## Research Objective
+
+The primary objective of this project is to model whether text is readable *in principle* (`can_read`) given a specific viewing configuration. In particular, the study investigates:
+
+- Whether a human-rated visibility score alone is predictively sufficient
+- How visibility compares against richer geometric and environmental feature sets
+- How robust predictive performance is under distributional shift and perturbation
+
+The emphasis is placed on interpretability, validation rigor, and uncertainty-aware evaluation rather than solely maximizing predictive accuracy.
+
+---
 
 ## Reference Repository (Group Project)
 
-The original group project repository, which contains the full implementation and experimental artifacts, is available at:
+The full group project repository, which contains all executable source code and experimental artifacts, is available at:
 
 https://github.com/NattakittiP/visibility_aware_readability
 
-All core scientific contributions, code design, and reported results originate from the group project repository above. This repository exists to satisfy the individual GitHub submission requirement.
+All core scientific contributions, modeling decisions, and reported results originate from the group project repository above. This repository exists to satisfy the individual GitHub repository requirement.
 
-## Scientific Scope and Interpretation
+---
 
-The dataset includes a human-rated visibility score that serves as a perceptual proxy for text readability. Because this score is derived from human judgment, it is inherently correlated with the binary readability label (`can_read`).
+## Scope and Interpretation (Important)
 
-As a result, all analyses presented in the referenced work should be interpreted carefully:
+The dataset includes a human-rated visibility score that acts as a perceptual proxy for readability. Because this score is derived from human judgment, it is conceptually and statistically correlated with the binary readability label (`can_read`).
 
-- The findings reflect **predictive sufficiency** within the measured regime.
-- The results do not imply causal sufficiency.
-- Deployability in unconstrained or real-world classroom environments is not claimed.
-- The contribution is methodological, emphasizing careful validation, uncertainty quantification, and interpretability.
+Accordingly, all analyses should be interpreted under the following constraints:
+
+- Results reflect **predictive sufficiency**, not causal sufficiency
+- Deployability in unconstrained real-world classrooms is not claimed
+- The contribution is methodological rather than prescriptive
+- Claims are restricted to the controlled measurement regime studied
+
+---
 
 ## Repository Organization (Original Design)
 
-The referenced GitHub repository is intentionally structured to support clean reproducibility and transparent auditing. It is split into two main branches:
+The referenced repository is intentionally structured to support clean reproducibility, transparent auditing, and reviewer-friendly inspection. It is split into two primary branches:
 
 ### Code
-This branch contains all executable source code used in the study. It includes data preprocessing, model training, evaluation pipelines, and analysis scripts. All scripts are designed with leakage-safe preprocessing and consistent experimental protocols.
+Contains all executable source code used in the study, including data preprocessing, model training, evaluation pipelines, and analysis scripts. All pipelines are designed to be leakage-safe and methodologically consistent.
 
 ### Result
-This branch contains all artifacts generated by the code. These include CSV result tables, figures, and LaTeX files that correspond exactly to the reported experimental results. This separation between code and results ensures reviewer-friendly inspection and reproducibility.
+Contains all artifacts generated by the code, including CSV tables, figures, and LaTeX files corresponding exactly to the reported experimental results. This strict separation ensures that reported findings can be independently verified.
 
-## Experimental Components Reproduced
+---
 
-Running the code from the referenced repository reproduces all components reported in the associated manuscript, including:
+## Experimental Pipeline Overview
 
-### 1. Scenario-Level Evaluation
+Running the code in the referenced repository reproduces the full experimental pipeline reported in the manuscript.
+
+### Scenario-Level Evaluation
 - Repeated stratified cross-validation
-- Pooled out-of-fold (OOF) predictions
-- Condition-blocked cross-validation as a proxy for deployment shift
+- Pooled out-of-fold (OOF) prediction aggregation
+- Condition-blocked cross-validation to simulate deployment shift
 
-### 2. Interpretable Modeling
+### Modeling Approaches
 - L2-regularized Logistic Regression
 - Random Forest classifiers
-- Consistent feature preprocessing pipelines
+- Unified preprocessing pipelines for fair comparison
 
-### 3. Probability Calibration
-- Uncalibrated baseline models
+### Probability Calibration
+- Uncalibrated baselines
 - Platt scaling
 - Isotonic regression  
-(All calibration methods are fit strictly on training-only predictions.)
+(All calibration models are fit strictly on training-only predictions.)
 
-### 4. Explainability and Interpretation
+### Explainability and Diagnostics
 - Impurity-based feature importance
 - Permutation importance
 - One- and two-dimensional Partial Dependence Plots (PDPs)
 
-### 5. Sufficiency-Oriented Analyses (Predictive, Not Causal)
-- Feature ablation studies:
-  - Geometry-only features
-  - Visibility-only features
-  - Geometry plus visibility features
+### Sufficiency-Oriented Analyses
+- Geometry-only models
+- Visibility-only models
+- Geometry plus visibility models
 - Paired AUC comparisons using pooled OOF predictions
 - Residualization-style stress tests
-- Information-theoretic summaries as implemented
+- Information-theoretic summaries
 
-### 6. Robustness Diagnostics
-- Structured perturbations including:
-  - Visibility bias and clipping
-  - Head pose quantization
-  - Feature noise injection
-- Performance degradation tracking under perturbations
-
-### 7. Uncertainty-Aware Evaluation
+### Robustness and Uncertainty-Aware Evaluation
+- Structured perturbations and stress tests
 - Bootstrap confidence intervals
-- Subgroup and worst-case performance reporting
-- Split conformal prediction under scenario-level splits
-- Mondrian (group-conditional) conformal coverage
+- Subgroup and worst-case reporting
+- Split conformal prediction
+- Mondrian (group-conditional) conformal prediction coverage
+
+---
 
 ## Dataset Assumptions
+All scripts assume the presence of a CSV file named:
 
-All scripts expect a CSV file named:
 
 ### Required Columns
 
@@ -116,18 +133,21 @@ All scripts expect a CSV file named:
 **Optional**
 - `participant_id`
 
-If `participant_id` is absent, some scripts generate balanced pseudo-participants strictly for stress-testing and leave-one-participant-out (LOPO)-style evaluation. These are not treated as real subjects.
+If `participant_id` is absent, some scripts generate balanced pseudo-participants strictly for stress-testing and LOPO-style evaluation. These pseudo-identifiers are not treated as real subjects.
 
-## Reproducibility Practices
+---
 
-The referenced implementation emphasizes reproducibility and methodological rigor:
+## Installation
 
-- Fixed random seeds (`RANDOM_STATE = 42`) throughout
-- Leakage-safe preprocessing pipelines
-- Deterministic outputs except where stochastic repetition is intentional
-- Clear separation of code and results via GitHub branches
+The codebase relies on standard scientific Python libraries and is designed to be lightweight and reproducible. A virtual environment is recommended.
 
-## Final Note
+### Requirements
+- Python 3.8 or newer
+- CPU-only execution
 
-This repository is maintained to fulfill the **individual GitHub repository requirement** for the course. For full implementation details, experimental pipelines, and reproducible results, please refer to the group project repository linked above.
+### Install Dependencies
+
+```bash
+pip install -U numpy pandas scikit-learn scipy matplotlib tqdm seaborn
+
 
